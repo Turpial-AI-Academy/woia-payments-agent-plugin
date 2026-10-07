@@ -100,7 +100,7 @@ export function transition(original, command, context) {
     fail((receipt.status!=='SUCCEEDED'||confirmed===total) && (receipt.status!=='FAILED'||confirmed===0n) && (receipt.status!=='PARTIAL'||confirmed>0n&&confirmed<total),'STATUS_AMOUNT_CONFLICT');
     fail(!['SUCCEEDED','FAILED'].includes(effect.status)||receipt.status===effect.status&&confirmed===minor(effect.confirmed_minor),'TERMINAL_OUTCOME_IMMUTABLE');
     const delta=confirmed-minor(effect.confirmed_minor);r.remaining=(minor(r.remaining)-delta).toString();r.consumed=(minor(r.consumed)+delta).toString();effect.confirmed_minor=confirmed.toString();effect.status=receipt.status;effect.evidence=receipt.evidence;r.status=receipt.status==='FAILED'?'FAILED':receipt.status;
-    state.reconciliation.push({kind:'EffectReconciliation',effect_id:effect.id,...structuredClone(receipt)});result=effect;
+    state.reconciliation.push({...structuredClone(receipt),kind:'EffectReconciliation',effect_id:effect.id});result=effect;
   } else if(command.action==='payment.release-reservation') {
     const r=state.reservations[command.target];fail(r,'RESERVATION_NOT_FOUND');const effects=Object.values(state.effects).filter(e=>e.reservation_id===r.id);
     fail(!effects.some(e=>['UNKNOWN','PARTIAL'].includes(e.status)),'RECONCILE_BEFORE_RELEASE');fail(r.status!=='SUCCEEDED','CONSUMED_RESERVATION');approval(command,context);r.remaining='0';r.status='RELEASED';result=r;
@@ -109,7 +109,7 @@ export function transition(original, command, context) {
     fail(text(p.evidence) && text(p.source_version) && ['CONFIRMED','DISPUTED','REVERSED','UNKNOWN'].includes(p.status),'RECONCILIATION_EVIDENCE_REQUIRED');
     const observation=state.observations[p.observation_id];fail(observation && observation.account===payment.account && observation.namespace===state.observations[payment.observation_id].namespace && observation.source_id===state.observations[payment.observation_id].source_id,'SAME_PAYMENT_SOURCE_REQUIRED');
     sourceRule({...command,account:payment.account,source_map_version:p.source_map_version},context,observation);
-    result={kind:'PaymentReconciliation',payment_id:payment.id,...structuredClone(p),recorded_at:context.now};state.reconciliation.push(result);
+    result={...structuredClone(p),kind:'PaymentReconciliation',payment_id:payment.id,recorded_at:context.now};state.reconciliation.push(result);
   }
   state.revision++;state.operations[command.operation_key]={digest:fingerprint,result:structuredClone(result)};
   return {state,result:structuredClone(result),dispatch};
