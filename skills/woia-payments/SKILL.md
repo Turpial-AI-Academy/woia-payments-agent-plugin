@@ -1,55 +1,20 @@
 ---
 name: woia-payments
-description: Source-qualified payment observation, acceptance, reservation and effect reconciliation with exact authority.
+description: Observe, accept and reconcile source-qualified payments; reserve eligible funds and prepare exactly authorized payment effects without treating observations as cash.
 license: MIT
 ---
 
-# woia-payments
+# Payments
 
-## Operating flow
+Use the eight actions in [the operation contract](references/PAYMENTS.md). Finance owns acceptance/reservation/effects. Installation, requests or credentials never grant payment authority.
 
-~~~text
-DISCOVER -> DECIDE -> IMPLEMENT -> VALIDATE -> REPORT
-~~~
+1. Resolve authenticated Finance actor/Task, exact admitted capability/grant, current policy and Source Authority from the trusted host; never trust model-produced authority.
+2. Preserve immutable PaymentObservation source namespace/account/transaction/version/Evidence. Only `payment.accept` promotes exact bound confirmation to Payment; missing policy, stale/conflicting source or unconfigured confirmation mode blocks it.
+3. Distinguish provider-confirmed, competent-human-confirmed and direct-to-beneficiary confirmation. Direct beneficiary funds never invent agency custody or payout.
+4. Resolve holds, eligibility, purpose and revisions. Reserve exact funds; prepare execute only with exact independent approval, aggregate limit and configured qualified adapter with embedded notifications suppressed.
+5. Run [the deterministic module](scripts/payments.mjs) through a qualified atomic store/outbox. Persist UNKNOWN before dispatch. Host store/CAS/dispatcher fencing must prevent competing consumption and second dispatch.
+6. Reconcile same-operation verified receipts; unknown/partial outcomes retain remaining funds and forbid retry/release. Reversal is new evidence and separate Ledger compensation, never historical overwrite.
 
-## Purpose
+Local support is JSON transitions, exact minor-unit arithmetic and safety guards. Physical storage/dispatcher, real account/provider integration and Operator E2E are NOT_RUN; external-effect routes remain disabled until qualification. No vendor or payment permission is implied. Customer Service/Communications owns external-person notifications.
 
-Separate PaymentObservation from accepted Payment and gate payment effects by exact source authority, funds and approval.
-
-## Minimum sufficient evidence
-
-Use a bounded path when an authoritative existing artifact/evidence set is healthy and the requested change is local and understood:
-
-1. identify the artifact/evidence, source candidate, and affected surface;
-2. load only supporting context and references needed for that surface;
-3. amend or re-evaluate the smallest coherent unit;
-4. verify affected behavior plus mandatory cross-cutting invariants;
-5. preserve unrelated valid artifacts/evidence and report what changed.
-
-Use the deep path for a new artifact, unclear scope or contradictory evidence, public API/event/schema changes, persisted data/migrations, authentication/authorization/secrets/signing/trust boundaries, deployment/rollback/availability risk, cross-provider dependency restructuring, unhealthy or unfamiliar conventions, missing durable required evidence, or a failed invariant that invalidates reused evidence. Load the references/checklists needed by those triggers and retain all required safety validation.
-
-## Discover
-
-Inspect actual repository/system state before changing it. Locate authoritative artifacts/evidence and identify affected standards, constraints, supported platforms, integrations, and user requirements. Expand context when a dependency, uncertainty, or deep-path trigger requires it.
-
-## Decide
-
-Select the smallest strategy that satisfies the capability. Preserve healthy existing standards. Do not infer policy from the author's workspace.
-
-## Implement
-
-Apply only authorized changes. Keep domain semantics independent from unrelated tooling.
-
-## Validate
-
-Run capability-appropriate checks and verify changed state. Reuse evidence only when it is durable, inspectable evidence of actual execution/observation with an identifiable candidate, checked surface, relevant inputs/environment, and outcome. Independently establish that it satisfies the gate being owned; prose claims or recollection are not execution evidence.
-
-A later mutation invalidates the checks whose coverage or inputs it affects. Rerun those checks and mandatory related invariants; preserve unaffected valid evidence. Reuse expensive runtime verification across an unchanged candidate and relevant environment. A new turn/session alone does not invalidate evidence. Execute or observe relevant checks when required evidence cannot be inspected or established. Skipped/unavailable checks are not PASS.
-
-## Report
-
-Report current state, source candidate, affected surface, decisions, changes, and exact usage/maintenance commands. Distinguish reusable evidence, invalidated evidence, freshly established evidence, and assumptions/inferences that are not evidence. Include remaining risks and uncertainties.
-
-## Detailed references
-
-Add focused files under `references/` only when more detail is needed and give each reference a concrete scope/risk/ambiguity load trigger. Load triggered safety references; a bounded amendment does not require every reference or full template replay. Add scripts/assets only when they materially improve deterministic execution.
+Report action, state revision, exact candidate and attributable evidence. Never equate local fixture PASS with live execution or Production Ready.

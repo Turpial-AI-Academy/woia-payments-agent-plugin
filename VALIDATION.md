@@ -1,29 +1,7 @@
-# Validation obligations
+# Validation
 
-The scaffold supplies generic package/release validation and regression fixtures. Add domain-specific tests and regressions.
+Run `mise run test` and `mise run ci:fast`; domain suite `tests/payments-domain.test.mjs` uses synthetic XTS money, source identities and trusted fixture contexts. It checks exact minor units; Observation/Payment separation; confirmation modes; source/authority/scope/revision guards; dedupe; holds and competing reserves; exact approval/aggregate limits; UNKNOWN before dispatch; no retry/release on uncertainty; replay without redispatch; partial consumption; receipt/terminal-state integrity; scoped status and atomic host-port behavior.
 
-Capability regressions should prove bounded amendments of healthy authoritative artifacts, deep-path escalation, preservation of unrelated valid artifacts/evidence, targeted invalidation/revalidation, and independent gate ownership. Assert semantic obligations or observable behavior rather than rigid prose sentences unless exact wording is the contract. Adapt these cases to the capability; do not embed provider-specific policy in generic package validation.
+Thin certification executes these authoring-only tests and checks the exact committed portable plugin. Canonical MIT license remains the official scaffold bytes.
 
-Report reusable durable execution/observation evidence, invalidated evidence, freshly established evidence, and assumptions/inferences that are not evidence. Independently inspect reused evidence and rerun affected checks plus mandatory invariants when changes invalidate it. This refinement does not reduce the formal gates below.
-
-Before first release:
-
-~~~text
-# after README.plugin.md -> README.md and placeholder replacement
-mise install
-mise run bootstrap
-# optional source diagnostic; not a release gate
-pnpm run checksums:generate
-mise run doctor
-mise run validate
-mise run test
-mise run ci:fast
-mise run ci:extended
-mise run jobs:local
-# commit candidate
-mise run release:check
-~~~
-
-Also run `skills-ref validate` for each skill when available.
-
-No placeholder token or scaffold-only `README.plugin.md` may remain in the release candidate.
+NOT_RUN: real bank/provider integration, physical store/transaction/outbox/fenced dispatcher, cross-provider aggregate/funds atomicity, actual authority/source resolution, authenticated receipts, Operator E2E and Production Ready. A fixture or pure transition does not qualify a production host. External routes stay disabled until applicable gates pass.
