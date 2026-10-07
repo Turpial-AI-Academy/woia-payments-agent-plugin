@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:woia:payments:command:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["org", "action", "target", "operation_key", "expected_revision", "payload"],
+  "properties": {
+    "org": {"type": "string", "minLength": 1},
+    "action": {"enum": ["payment.observe", "payment.accept", "payment.reconcile", "payment.reserve", "payment.execute", "payment.status.observe", "payment.effect.reconcile", "payment.release-reservation"]},
+    "target": {"type": "string", "minLength": 1},
+    "operation_key": {"type": "string", "minLength": 1},
+    "expected_revision": {"type": "integer", "minimum": 0},
+    "payload": {"type": "object", "description": "Envelope validation only; action-specific semantics are checked by the deterministic operation boundary."}
+  }
+}

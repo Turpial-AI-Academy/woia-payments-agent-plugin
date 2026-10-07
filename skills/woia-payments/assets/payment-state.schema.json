@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:woia:payments:state:v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "org", "revision", "observations", "payments", "reservations", "effects", "operations", "reconciliation"],
+  "properties": {
+    "schema": {"const": "dev.woia.payments-state/v1"},
+    "org": {"type": "string", "minLength": 1},
+    "revision": {"type": "integer", "minimum": 0},
+    "observations": {"type": "object"},
+    "payments": {"type": "object"},
+    "reservations": {"type": "object"},
+    "effects": {"type": "object"},
+    "operations": {"type": "object"},
+    "reconciliation": {"type": "array", "items": {"type": "object"}}
+  }
+}

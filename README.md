@@ -1,42 +1,9 @@
-# woia-payments
+# WOIA Payments v0.5.0
 
-Portable Agent Plugin for Source-qualified payment observation, acceptance, reservation and effect reconciliation with exact authority..
+Shared Finance provider for attributable observation, source-qualified Payment acceptance, exact reservation and effect reconciliation. Original observations and Payments are immutable; unknown/partial outcomes retain eligible funds.
 
-## Capability
+Portable resources: [skill](skills/woia-payments/SKILL.md), [contract](skills/woia-payments/references/PAYMENTS.md), [module](skills/woia-payments/scripts/payments.mjs), [envelope schema](skills/woia-payments/assets/payment-command.schema.json).
 
-~~~text
-DISCOVER -> DECIDE -> IMPLEMENT -> VALIDATE -> REPORT
-~~~
+The module implements deterministic JSON transitions and an atomic host-store port. No payment vendor or outward notification is called. Trusted authority/source resolution, physical transactional store/outbox/fenced dispatcher and real provider/account adapters require later qualification; NOT_RUN. No live payment support or permission is claimed.
 
-The plugin adapts to the repository it operates on without requiring the consumer to adopt WOIA's authoring toolchain.
-
-## Portable package
-
-~~~text
-plugin.json
-README.md
-CHANGELOG.md
-LICENSE
-skills/**
-# optional source diagnostic when retained by the repository
-CHECKSUMS.sha256
-~~~
-
-`CHECKSUMS.sha256` is optional source evidence, not a required portable/release artifact.
-
-Add `mcp.json` only if the capability genuinely requires MCP.
-
-## Consumer requirements
-
-Document only genuine capability/runtime requirements here. Do not list maintenance Node/pnpm/Mise/Docker unless the portable capability itself truly needs them.
-
-## Development
-
-~~~text
-mise install
-mise run bootstrap
-mise run doctor
-mise run ci:fast
-mise run ci:extended
-mise run release:check
-~~~
+Official Ecosystem v0.5.4 scaffold/toolchain retained. Use `mise run bootstrap`, `mise run doctor`, `mise run test`, `mise run ci:fast`. Certify a clean committed candidate centrally with `mise run plugin:certify-thin --repo <absolute-path>`. Certification is not publication/admission.
