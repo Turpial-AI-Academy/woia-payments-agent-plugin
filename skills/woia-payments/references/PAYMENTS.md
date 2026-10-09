@@ -1,6 +1,5 @@
 # Payment contract v1
 
-Source: WOIA Real Estate `eb0a7278188b2f9968e21ed4299f08184d864cac`, ADR-0026/docs21, ADR-0027/docs22 and ADR-0029/docs24. No organization-private policy, account or vendor is bundled.
 
 | Action | Result |
 |---|---|
