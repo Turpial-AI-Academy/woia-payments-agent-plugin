@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "woia-payments",
-  "version": "0.5.0",
+  "version": "0.5.6",
   "description": "Source-qualified payment observation, acceptance, reservation and effect reconciliation with exact authority.",
   "author": {
     "name": "Turpial AI Academy",
@@ -10,5 +10,8 @@
   "homepage": "https://github.com/Turpial-AI-Academy/woia-payments-agent-plugin",
   "repository": "https://github.com/Turpial-AI-Academy/woia-payments-agent-plugin",
   "license": "MIT",
-  "keywords": ["agent-plugin", "woia-payments"]
+  "keywords": [
+    "agent-plugin",
+    "woia-payments"
+  ]
 }
