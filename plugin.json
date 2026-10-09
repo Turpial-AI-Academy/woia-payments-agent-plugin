@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "woia-payments",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "Source-qualified payment observation, acceptance, reservation and effect reconciliation with exact authority.",
   "author": {
     "name": "Turpial AI Academy",
