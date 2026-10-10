@@ -1,6 +1,6 @@
 {
   "schema": "dev.woia.provider-manifest/v1",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "authoring_profile": "thin",
   "origin": "native",
   "capability": "payments",
