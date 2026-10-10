@@ -1,4 +1,4 @@
-# WOIA Payments v0.5.7
+# WOIA Payments v0.5.8
 
 Shared Finance provider for attributable observation, source-qualified Payment acceptance, exact reservation and effect reconciliation. Original observations and Payments are immutable; unknown/partial outcomes retain eligible funds.
 
